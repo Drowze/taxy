@@ -1,14 +1,13 @@
 require 'bundler/setup'
 require 'taxy'
+require 'webmock/rspec'
 
-RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = '.rspec_status'
+Dir[File.join(File.dirname(__FILE__), './support/**/*.rb')].each { |f| require f }
 
-  # Disable RSpec exposing methods globally on `Module` and `main`
-  config.disable_monkey_patching!
+RSpec.configure do |c|
+  c.include HttpMockHelpers
 
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
+  c.before :all do
+    WebMock.disable_net_connect!(allow_localhost: true)
   end
 end

@@ -1,6 +1,10 @@
+require 'virtus'
+
 require 'connection'
 require 'client/estimate'
 require 'client/user'
+
+require 'models/estimation'
 
 module Taxy
   class Client

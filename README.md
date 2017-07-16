@@ -18,17 +18,40 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-Taxy::Client.new(bearer_token: <TOKEN>)
+Taxy::Client.new(bearer_token: 123)
+=> #<Taxy::Client:0x00000001ebe280 @bearer_token=123>
 ```
 
 ```ruby
 taxy = Taxy::Client.new(bearer_token: 123)
-taxy.user # => get info about current user
+taxy.user # http://developers.cabify.com/#users
+=> #<Taxy::User:0x00000001a31500
+ @avatar_url="http://example.com/example.jpg",
+ @email="johndoe@example.com",
+ @locale="pt-BR",
+ @mobile_cc="12",
+ @mobile_num="123123123",
+ @name="John",
+ @surname="Doe">
 ```
 
 ```ruby
-taxy = Taxy::Client.new(bearer_token: 123)}] }
-taxy.estimate(starting_latitude: 1, starting_longitude: 1, ending_latitude: 1, ending_longitude: 1) #=> get estimation from starting point to ending point
+taxy = Taxy::Client.new(bearer_token: 123) # http://developers.cabify.com/#estimates
+taxy.estimate(starting_latitude: 1, starting_longitude: 1, ending_latitude: 1, ending_longitude: 1)
+=> [#<Taxy::Estimation:0x00000002053eb0
+  @currency="EUR",
+  @currency_symbol="€",
+  @price_formatted="12.34€",
+  @total_price=1234,
+  @vehicle_type=
+   #<Taxy::Estimation::Vehicle:0x00000002053de8
+    @_id="executive_id",
+    @description="A very large vehicle with comfortable seats",
+    @eta=#<Taxy::Estimation::Vehicle::Eta:0x00000002053780 @formatted=">2 min", @low_availability=nil, @max=1000, @min=100>,
+    @icon="executive",
+    @icons=#<Taxy::Estimation::Vehicle::Icons:0x00000002053988 @regular="https://cabify.com/images/icons/vehicle_type/executive_27.png">,
+    @name="Executive Class",
+    @short_name="Executive">>]
 ```
 
 ## Contributing

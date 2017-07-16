@@ -1,3 +1,5 @@
+require 'models/estimation'
+
 module Taxy
   class Client
     module Estimate
@@ -6,7 +8,8 @@ module Taxy
 
         params = build_params([starting_latitude, starting_longitude], [ending_latitude, ending_longitude])
 
-        post('/api/v2/estimate', params)
+        response = post('/api/v2/estimate', params)
+        response.map { |est| Taxy::Estimation.new(est) } if @last_response.success?
       end
 
       private

@@ -5,10 +5,11 @@ module Taxy
   module Response
     class ParseJson < Faraday::Response::Middleware
       WHITESPACE_REGEX = /\A^\s*$\z/
+      GATEWAY_TIMEOUT_REGEX = /504 Gateway Time-out/ # because cabify's API ain't tamed
 
       def parse(body)
         case body
-        when WHITESPACE_REGEX, nil
+        when WHITESPACE_REGEX, GATEWAY_TIMEOUT_REGEX, nil
           nil
         else
           JSON.parse(body, symbolize_names: true)
